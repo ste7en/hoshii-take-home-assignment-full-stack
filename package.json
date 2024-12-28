@@ -1,0 +1,9 @@
+{
+  "name": "hoshii-take-home-assignment-full-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ste7en/hoshii-take-home-assignment-full-stack",
+  "author": "Stefano Formicola <stefanoformicola@icloud.com>",
+  "license": "MIT",
+  "private": false
+}
