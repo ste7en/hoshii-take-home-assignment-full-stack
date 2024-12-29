@@ -17,7 +17,10 @@ export function EmailMessage({ message }: EmailMessageProps) {
         </div>
       </div>
       <div className="pl-10 text-sm">
-        <div className="rounded-lg bg-muted/50 p-3">{message.content}</div>
+        <div 
+          className="prose prose-sm max-w-none rounded-lg bg-muted/50 p-3"
+          dangerouslySetInnerHTML={{ __html: message.content }}
+        />
       </div>
     </div>
   )
