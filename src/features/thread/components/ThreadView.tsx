@@ -2,7 +2,6 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { EmailMessage } from "@/features/email/components/EmailMessage"
 import { EmailReplyBox } from "@/features/email/components/EmailReplyBox"
-import { AssigneeGroup } from "./AssigneeGroup"
 import { useThread } from "../context"
 import { EmptyState } from "./EmptyState"
 
@@ -17,16 +16,10 @@ export function ThreadView() {
     <div className="space-y-6">
       <Card className="flex flex-col">
         <CardHeader className="border-b px-4 py-3 flex-shrink-0">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">{currentThread.subject}</h2>
-              <AssigneeGroup />
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>From: {currentThread.name}</span>
-              <span>·</span>
-              <span>{currentThread.date}</span>
-            </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <span>From: {currentThread.name}</span>
+            <span>·</span>
+            <span>{currentThread.date}</span>
           </div>
         </CardHeader>
         <ScrollArea className="flex-1">
