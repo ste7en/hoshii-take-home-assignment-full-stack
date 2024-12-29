@@ -8,6 +8,8 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react"
+import { useUser } from "@/features/user/context"
+import { getInitials, getColorFromString } from "@/features/user/utils"
 
 import {
   Avatar,
@@ -30,16 +32,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }
-}) {
+export function NavUser() {
+  const { state: { user } } = useUser()
   const { isMobile } = useSidebar()
+
+  if (!user) return null
+
+  const initials = getInitials(user.name)
+  const avatarColor = getColorFromString(user.name)
 
   return (
     <SidebarMenu>
@@ -52,7 +52,12 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback 
+                  className="rounded-lg text-white"
+                  style={{ backgroundColor: avatarColor }}
+                >
+                  {initials}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -71,7 +76,12 @@ export function NavUser({
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback 
+                    className="rounded-lg text-white"
+                    style={{ backgroundColor: avatarColor }}
+                  >
+                    {initials}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
