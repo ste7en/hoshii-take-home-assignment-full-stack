@@ -4,17 +4,21 @@ export interface Mail {
   subject: string
   date: string
   teaser: string
-}
-
-export interface EmailThread extends Mail {
   messages: EmailMessage[]
   assignees: string[]
 }
 
 export interface EmailMessage {
   id: string
-  from: string
-  to: string[]
+  from: {
+    name: string
+    email: string
+    avatar?: string
+  }
+  to: Array<{
+    name: string
+    email: string
+  }>
   content: string
   timestamp: string
 } 

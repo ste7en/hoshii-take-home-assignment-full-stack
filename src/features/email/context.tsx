@@ -43,7 +43,23 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
             ? { 
                 ...thread,
                 teaser: action.message,
-                date: new Date().toLocaleTimeString()
+                date: new Date().toLocaleTimeString(),
+                messages: [
+                  ...thread.messages,
+                  {
+                    id: Date.now().toString(),
+                    from: {
+                      name: "Me",
+                      email: "me@example.com",
+                    },
+                    to: [{
+                      name: thread.name,
+                      email: thread.email
+                    }],
+                    content: action.message,
+                    timestamp: new Date().toLocaleTimeString()
+                  }
+                ]
               }
             : thread
         )
@@ -63,10 +79,22 @@ export function EmailProvider({ children }: { children: React.ReactNode }) {
         subject: "Meeting Tomorrow",
         date: "09:34 AM",
         teaser: "Hi team, just a reminder about our meeting tomorrow at 10 AM.\nPlease come prepared with your project updates.",
-      },
-      // ... copy other emails from app-sidebar.tsx
+        messages: [
+          {
+            id: "1",
+            from: {
+              name: "William Smith",
+              email: "williamsmith@example.com",
+            },
+            to: [{ name: "Me", email: "me@example.com" }],
+            content: "Hi team, just a reminder about our meeting tomorrow at 10 AM.\nPlease come prepared with your project updates.",
+            timestamp: "09:34 AM"
+          }
+        ],
+        assignees: []
+      }
     ],
-    assignees: ["John Doe", "Jane Smith", "Bob Johnson"] // Sample assignees
+    assignees: ["John Doe", "Jane Smith", "Bob Johnson"]
   })
 
   return (
