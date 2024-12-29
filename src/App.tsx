@@ -1,13 +1,15 @@
 import Layout from './app/Layout'
+import { EmailProvider } from '@/features/email/context'
+import { UserProvider } from '@/features/user/context'
 
 function App() {
   return (
-    <Layout>
-      <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">Welcome</h1>
-        <p>This is the main content area.</p>
-      </div>
-    </Layout>
+    <UserProvider>
+      <EmailProvider>
+        <Layout>
+        </Layout>
+      </EmailProvider>
+    </UserProvider>
   )
 }
 
