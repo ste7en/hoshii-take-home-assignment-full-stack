@@ -53,7 +53,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     user: {
       name: "Stefano Formicola",
       email: "stefano@formicola.com",
-      avatar: "/avatars/stefano.jpg",
+      avatar: "https://www.gravatar.com/avatar/729926fa345d27f81fdc37c7f12f2319?s=2048",
       role: "Admin"
     },
     isLoading: false
