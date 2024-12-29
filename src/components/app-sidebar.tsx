@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils"
+import { formatDate } from "@/utils/date"
 
 // Keep the navMain data here since it's navigation-specific
 const navMain = [
@@ -156,7 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 >
                   <div className="flex w-full items-center gap-2">
                     <span>{mail.name}</span>
-                    <span className="ml-auto text-xs">{mail.date}</span>
+                    <span className="ml-auto text-xs">{formatDate(mail.date)}</span>
                   </div>
                   <span className="font-medium">{mail.subject}</span>
                   <span className="line-clamp-2 w-[260px] whitespace-break-spaces text-xs">

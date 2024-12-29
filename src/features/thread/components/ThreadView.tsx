@@ -4,6 +4,7 @@ import { EmailMessage } from "@/features/email/components/EmailMessage"
 import { EmailReplyBox } from "@/features/email/components/EmailReplyBox"
 import { useThread } from "../context"
 import { EmptyState } from "./EmptyState"
+import { formatDate } from "@/utils/date"
 
 export function ThreadView() {
   const { currentThread } = useThread()
@@ -19,7 +20,7 @@ export function ThreadView() {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>From: {currentThread.name}</span>
             <span>·</span>
-            <span>{currentThread.date}</span>
+            <span>{formatDate(currentThread.date)}</span>
           </div>
         </CardHeader>
         <ScrollArea className="flex-1">

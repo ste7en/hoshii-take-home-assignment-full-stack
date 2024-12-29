@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/date"
 import { EmailMessage as EmailMessageType } from "../types"
 import { UserAvatar } from "@/features/user/components"
 
@@ -12,7 +13,7 @@ export function EmailMessage({ message }: EmailMessageProps) {
         <UserAvatar user={message.from} />
         <div>
           <div className="font-medium">{message.from.name}</div>
-          <div className="text-xs text-muted-foreground">{message.timestamp}</div>
+          <div className="text-xs text-muted-foreground">{formatDate(message.timestamp)}</div>
         </div>
       </div>
       <div className="pl-10 text-sm">
