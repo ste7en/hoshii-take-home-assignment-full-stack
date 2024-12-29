@@ -1,7 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { EmailMessage } from "@/features/email/components/EmailMessage"
-import { EmailReplyBox } from "@/features/email/components/EmailReplyBox"
+import { ThreadReplyBox } from "@/features/thread/components/ThreadReplyBox"
 import { useThread } from "../context"
 import { EmptyState } from "./EmptyState"
 import { formatDate } from "@/utils/date"
@@ -36,7 +36,7 @@ export function ThreadView() {
 
       <Card>
         <CardContent className="p-4">
-          <EmailReplyBox threadId={currentThread.email} />
+          <ThreadReplyBox />
         </CardContent>
       </Card>
     </div>

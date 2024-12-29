@@ -1,24 +1,16 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { useEmail } from "../context"
+import { useThread } from "../context"
 
-interface EmailReplyBoxProps {
-  threadId: string
-}
-
-export function EmailReplyBox({ threadId }: EmailReplyBoxProps) {
+export function ThreadReplyBox() {
+  const { addReply } = useThread()
   const [message, setMessage] = React.useState("")
-  const { dispatch } = useEmail()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!message.trim()) return
 
-    dispatch({
-      type: "ADD_REPLY",
-      threadId,
-      message: message.trim()
-    })
+    addReply(message.trim())
     setMessage("")
   }
 
