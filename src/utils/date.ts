@@ -32,3 +32,7 @@ export function formatDate(isoString: string, locale = navigator.language): stri
     day: 'numeric'
   }).format(date);
 }
+
+export function sortByDateDesc(a: string, b: string): number {
+  return new Date(b).getTime() - new Date(a).getTime()
+}

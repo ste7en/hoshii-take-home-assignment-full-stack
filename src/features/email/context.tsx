@@ -2,6 +2,7 @@ import * as React from "react"
 import { Mail } from "./types"
 import { MOCK_EMAILS, MOCK_ASSIGNEES } from "@/features/mock"
 import { User } from "@/features/user/types"
+import { sortThreadsByDateDesc } from "../thread/utils"
 
 interface EmailState {
   selectedThreadId: string | null
@@ -65,7 +66,7 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
                 ]
               }
             : thread
-        )
+        ).sort(sortThreadsByDateDesc)
       }
     }
     default:
