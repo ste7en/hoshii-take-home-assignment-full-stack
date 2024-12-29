@@ -2,9 +2,9 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { EmailMessage } from "@/features/email/components/EmailMessage"
 import { EmailReplyBox } from "@/features/email/components/EmailReplyBox"
-import { EmptyState } from "@/features/email/components/EmptyState"
 import { AssigneeGroup } from "./AssigneeGroup"
 import { useThread } from "../context"
+import { EmptyState } from "./EmptyState"
 
 export function ThreadView() {
   const { currentThread } = useThread()
