@@ -13,7 +13,7 @@ interface EmailState {
 type EmailAction = 
   | { type: "SELECT_THREAD"; threadId: string }
   | { type: "ASSIGN_THREAD"; threadId: string; assigneeIds: string[] }
-  | { type: "ADD_REPLY"; threadId: string; message: string }
+  | { type: "ADD_REPLY"; threadId: string; message: string; sender: User }
 
 interface EmailContextType {
   state: EmailState
@@ -39,6 +39,8 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
         )
       }
     case "ADD_REPLY": {
+      if (!action.sender) return state
+      
       const timestamp = new Date().toISOString()
       return {
         ...state,
@@ -52,13 +54,10 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
                   ...thread.messages,
                   {
                     id: Date.now().toString(),
-                    from: {
-                      name: "Me",
-                      email: "me@example.com",
-                    },
+                    from: action.sender,
                     to: [{
                       name: thread.name,
-                      email: thread.email
+                      email: thread.email,
                     }],
                     content: action.message,
                     timestamp

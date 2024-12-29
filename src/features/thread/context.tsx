@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Mail } from "@/features/email/types"
 import { useEmail } from "@/features/email/context"
+import { useUser } from "../user/context"
 
 interface ThreadContextType {
   currentThread: Mail | undefined
@@ -12,6 +13,7 @@ const ThreadContext = React.createContext<ThreadContextType | undefined>(undefin
 
 export function ThreadProvider({ children }: { children: React.ReactNode }) {
   const { state, dispatch } = useEmail()
+  const { state: { user } } = useUser()
   const currentThread = state.threads.find(
     (thread) => thread.email === state.selectedThreadId
   )
@@ -27,14 +29,15 @@ export function ThreadProvider({ children }: { children: React.ReactNode }) {
       })
     },
     addReply: (message: string) => {
-      if (!currentThread) return
+      if (!currentThread || !user) return
       dispatch({
         type: "ADD_REPLY",
         threadId: currentThread.email,
-        message
+        message,
+        sender: user
       })
     }
-  }), [currentThread, dispatch])
+  }), [currentThread, user, dispatch])
 
   return (
     <ThreadContext.Provider value={value}>
