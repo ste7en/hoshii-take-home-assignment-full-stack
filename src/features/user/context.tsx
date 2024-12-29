@@ -1,4 +1,5 @@
 import * as React from "react"
+import { MOCK_USER } from "@/features/mock"
 
 interface User {
   name: string
@@ -50,12 +51,7 @@ function userReducer(state: UserState, action: UserAction): UserState {
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = React.useReducer(userReducer, {
-    user: {
-      name: "Stefano Formicola",
-      email: "stefano@formicola.com",
-      avatar: "https://www.gravatar.com/avatar/729926fa345d27f81fdc37c7f12f2319?s=2048",
-      role: "Admin"
-    },
+    user: MOCK_USER,
     isLoading: false
   })
 
