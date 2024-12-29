@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
             <Separator orientation="vertical" className="mr-2 h-4" />
           </header>
           <main className="flex-1 overflow-auto">
-            <div className="container h-full py-6">
+            <div className="container h-full py-6 px-6 space-y-6">
               {children}
             </div>
           </main>
