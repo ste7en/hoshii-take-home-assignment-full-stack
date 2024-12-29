@@ -37,7 +37,8 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
             : thread
         )
       }
-    case "ADD_REPLY":
+    case "ADD_REPLY": {
+      const timestamp = new Date().toISOString()
       return {
         ...state,
         threads: state.threads.map(thread =>
@@ -45,7 +46,7 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
             ? { 
                 ...thread,
                 teaser: action.message,
-                date: new Date().toLocaleTimeString(),
+                date: timestamp,
                 messages: [
                   ...thread.messages,
                   {
@@ -59,13 +60,14 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
                       email: thread.email
                     }],
                     content: action.message,
-                    timestamp: new Date().toLocaleTimeString()
+                    timestamp
                   }
                 ]
               }
             : thread
         )
       }
+    }
     default:
       return state
   }
