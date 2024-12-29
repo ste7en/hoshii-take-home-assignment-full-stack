@@ -1,3 +1,13 @@
+import { User } from "@/features/user/types"
+
+export interface EmailMessage {
+  id: string
+  from: User
+  to: User[]
+  content: string
+  timestamp: string
+}
+
 export interface Mail {
   name: string
   email: string
@@ -6,19 +16,4 @@ export interface Mail {
   teaser: string
   messages: EmailMessage[]
   assignees: string[]
-}
-
-export interface EmailMessage {
-  id: string
-  from: {
-    name: string
-    email: string
-    avatar?: string
-  }
-  to: Array<{
-    name: string
-    email: string
-  }>
-  content: string
-  timestamp: string
 } 
