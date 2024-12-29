@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Plus } from "lucide-react"
 import { UserAvatar } from "@/features/user/components"
 import {
