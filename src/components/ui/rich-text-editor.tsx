@@ -1,8 +1,10 @@
 import * as React from "react"
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import Placeholder from '@tiptap/extension-placeholder'
 import { Toggle } from "@/components/ui/toggle"
 import { Bold, Italic, List, ListOrdered } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface RichTextEditorProps {
   value: string
@@ -12,11 +14,26 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder,
+        showOnlyWhenEditable: true,
+      })
+    ],
     content: value,
     editorProps: {
       attributes: {
-        class: 'min-h-[100px] w-full rounded-md border bg-transparent p-3 text-sm focus:outline-none'
+        class: cn(
+          "min-h-[100px] w-full rounded-md bg-transparent p-3 text-sm focus:outline-none",
+          "prose prose-sm max-w-none",
+          // Placeholder styles
+          "[&_p.is-editor-empty:first-child]:before:content-[attr(data-placeholder)]",
+          "[&_p.is-editor-empty:first-child]:before:text-muted-foreground",
+          "[&_p.is-editor-empty:first-child]:before:float-left",
+          "[&_p.is-editor-empty:first-child]:before:pointer-events-none",
+          "[&_p.is-editor-empty:first-child]:before:h-0",
+        )
       }
     },
     onUpdate: ({ editor }) => {
@@ -65,7 +82,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <ListOrdered className="h-4 w-4" />
         </Toggle>
       </div>
-      <EditorContent editor={editor} placeholder={placeholder} />
+      <EditorContent editor={editor} />
     </div>
   )
 } 
