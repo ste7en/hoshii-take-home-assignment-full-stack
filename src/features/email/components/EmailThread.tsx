@@ -4,6 +4,7 @@ import { useEmail } from "@/features/email/context"
 import { EmailMessage } from "./EmailMessage"
 import { EmailReplyBox } from "./EmailReplyBox"
 import { EmptyState } from "./EmptyState"
+import { AssigneeGroup } from "./AssigneeGroup"
 
 export function EmailThread() {
   const { state } = useEmail()
@@ -22,9 +23,10 @@ export function EmailThread() {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold">{selectedThread.subject}</h2>
-              <div className="flex items-center gap-2">
-                {/* Add assignee dropdown here */}
-              </div>
+              <AssigneeGroup 
+                threadId={selectedThread.email}
+                assigneesIds={selectedThread.assignees}
+              />
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>From: {selectedThread.name}</span>
