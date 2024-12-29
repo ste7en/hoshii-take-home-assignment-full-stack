@@ -8,7 +8,7 @@
 - [x] Reply Component
 - [ ] Mock Data vs. Real Backend
 - [ ] Integrating an Email Service
-- [ ] Rich Text Editor
+- [x] Rich Text Editor
 
 ### Nice to have
 

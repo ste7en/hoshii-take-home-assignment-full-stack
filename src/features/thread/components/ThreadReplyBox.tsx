@@ -1,6 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useThread } from "../context"
+import { RichTextEditor } from "@/components/ui/rich-text-editor"
 
 export function ThreadReplyBox() {
   const { addReply } = useThread()
@@ -16,11 +17,10 @@ export function ThreadReplyBox() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-2">
-      <textarea
-        className="min-h-[100px] w-full rounded-md border bg-transparent p-3 text-sm"
-        placeholder="Write your reply..."
+      <RichTextEditor
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={setMessage}
+        placeholder="Write your reply..."
       />
       <div className="flex justify-end">
         <button

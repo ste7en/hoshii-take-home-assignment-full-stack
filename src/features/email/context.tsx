@@ -3,6 +3,7 @@ import { Mail } from "./types"
 import { MOCK_EMAILS, MOCK_ASSIGNEES } from "@/features/mock"
 import { User } from "@/features/user/types"
 import { sortThreadsByDateDesc } from "../thread/utils"
+import { stripHtml } from "@/utils/text"
 
 interface EmailState {
   selectedThreadId: string | null
@@ -48,7 +49,7 @@ function emailReducer(state: EmailState, action: EmailAction): EmailState {
           thread.email === action.threadId
             ? { 
                 ...thread,
-                teaser: action.message,
+                teaser: stripHtml(action.message),
                 date: timestamp,
                 messages: [
                   ...thread.messages,
