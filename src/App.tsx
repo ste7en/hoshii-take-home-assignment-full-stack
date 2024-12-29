@@ -1,15 +1,17 @@
 import Layout from './app/Layout'
 import { EmailProvider } from '@/features/email/context'
 import { UserProvider } from '@/features/user/context'
-import { EmailThread } from '@/features/email/components'
+import { ThreadProvider, ThreadView } from '@/features/thread'
 
 function App() {
   return (
     <UserProvider>
       <EmailProvider>
-        <Layout>
-          <EmailThread />
-        </Layout>
+        <ThreadProvider>
+          <Layout>
+            <ThreadView />
+          </Layout>
+        </ThreadProvider>
       </EmailProvider>
     </UserProvider>
   )

@@ -3,11 +3,8 @@
 ## Todo List (assignment details below)
 
 - [x] Email Thread List
-  - [ ] Unreads
-  - [ ] Search
-  - [ ] Other inboxes
 - [x] Thread Details / Conversation View
-- [ ] Assignees and Dropdown
+- [x] Assignees and Dropdown
 - [x] Reply Component
 - [ ] Mock Data vs. Real Backend
 - [ ] Integrating an Email Service
@@ -15,6 +12,9 @@
 
 ### Nice to have
 
+- [ ] Unreads
+- [ ] Search
+- [ ] Other inboxes
 - [ ] Switch user
 - [ ] Light/Dark mode
 - [ ] Responsive

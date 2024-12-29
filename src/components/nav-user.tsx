@@ -9,13 +9,6 @@ import {
   Sparkles,
 } from "lucide-react"
 import { useUser } from "@/features/user/context"
-import { getInitials, getColorFromString } from "@/features/user/utils"
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,15 +24,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { UserAvatar } from "@/features/user/components"
 
 export function NavUser() {
   const { state: { user } } = useUser()
   const { isMobile } = useSidebar()
 
   if (!user) return null
-
-  const initials = getInitials(user.name)
-  const avatarColor = getColorFromString(user.name)
 
   return (
     <SidebarMenu>
@@ -50,15 +41,7 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback 
-                  className="rounded-lg text-white"
-                  style={{ backgroundColor: avatarColor }}
-                >
-                  {initials}
-                </AvatarFallback>
-              </Avatar>
+              <UserAvatar user={user} />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
@@ -74,15 +57,7 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback 
-                    className="rounded-lg text-white"
-                    style={{ backgroundColor: avatarColor }}
-                  >
-                    {initials}
-                  </AvatarFallback>
-                </Avatar>
+                <UserAvatar user={user} />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
                   <span className="truncate text-xs">{user.email}</span>
