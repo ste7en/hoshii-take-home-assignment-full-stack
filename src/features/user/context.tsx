@@ -1,12 +1,6 @@
 import * as React from "react"
 import { MOCK_USER } from "@/features/mock"
-
-interface User {
-  name: string
-  email: string
-  avatar: string
-  role: string
-}
+import { User } from "./types"
 
 interface UserState {
   user: User | null
