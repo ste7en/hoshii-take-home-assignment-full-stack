@@ -1,11 +1,12 @@
 import * as React from "react"
 import { Mail } from "./types"
 import { MOCK_EMAILS, MOCK_ASSIGNEES } from "@/features/mock"
+import { User } from "@/features/user/types"
 
 interface EmailState {
   selectedThreadId: string | null
   threads: Mail[]
-  assignees: string[]
+  assignees: User[]
 }
 
 type EmailAction = 
