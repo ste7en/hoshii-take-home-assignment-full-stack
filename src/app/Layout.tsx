@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
     <SidebarProvider 
       style={{ "--sidebar-width": "350px" } as React.CSSProperties}
     >
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex flex-1 h-screen overflow-hidden">
         <AppSidebar />
         <SidebarInset>
           <header className="sticky top-0 flex h-14 items-center gap-2 border-b bg-background px-4">
