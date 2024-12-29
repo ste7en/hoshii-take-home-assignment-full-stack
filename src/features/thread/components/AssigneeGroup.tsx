@@ -8,22 +8,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { useEmail } from "../context"
+import { useEmail } from "@/features/email/context"
+import { useThread } from "../context"
 
-interface AssigneeGroupProps {
-  threadId: string
-  assigneesIds: string[]
-}
-
-export function AssigneeGroup({ threadId, assigneesIds }: AssigneeGroupProps) {
-  const { state, dispatch } = useEmail()
+export function AssigneeGroup() {
+  const { state } = useEmail()
+  const { currentThread, assignThread } = useThread()
   const availableAssignees = state.assignees
 
-  const assignees = availableAssignees.filter((user) => assigneesIds.includes(user.email))
+  if (!currentThread) return null
+
+  const assignees = availableAssignees.filter((user) => 
+    currentThread.assignees.includes(user.email)
+  )
 
   return (
     <div className="flex items-center gap-1">
-      {/* Show avatars in a row */}
       <div className="flex -space-x-2">
         {assignees.map((user) => (
           <UserAvatar
@@ -34,7 +34,6 @@ export function AssigneeGroup({ threadId, assigneesIds }: AssigneeGroupProps) {
         ))}
       </div>
 
-      {/* Dropdown to manage assignees */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="rounded-full">
@@ -45,16 +44,12 @@ export function AssigneeGroup({ threadId, assigneesIds }: AssigneeGroupProps) {
           {availableAssignees.map((user) => (
             <DropdownMenuCheckboxItem
               key={user.email}
-              checked={assignees.some(a => a.email === user.email)}
+              checked={currentThread.assignees.includes(user.email)}
               onCheckedChange={(checked) => {
                 const newAssignees = checked
                   ? [...assignees, user]
                   : assignees.filter(a => a.email !== user.email)
-                dispatch({
-                  type: "ASSIGN_THREAD",
-                  threadId,
-                  assigneeIds: newAssignees.map(a => a.email)
-                })
+                assignThread(newAssignees.map(a => a.email))
               }}
             >
               <div className="flex items-center gap-2">
