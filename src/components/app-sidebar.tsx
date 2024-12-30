@@ -22,6 +22,7 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils"
 import { formatDate } from "@/utils/date"
+import { FeatureFlags } from "@/features/flags"
 
 // Keep the navMain data here since it's navigation-specific
 const navMain = [
@@ -30,30 +31,35 @@ const navMain = [
     url: "#",
     icon: Inbox,
     isActive: true,
+    enabled: true,
   },
   {
     title: "Drafts",
     url: "#",
     icon: File,
     isActive: false,
+    enabled: FeatureFlags.features.otherInboxes
   },
   {
     title: "Sent",
     url: "#",
     icon: Send,
     isActive: false,
+    enabled: FeatureFlags.features.otherInboxes
   },
   {
     title: "Junk",
     url: "#",
     icon: ArchiveX,
     isActive: false,
+    enabled: FeatureFlags.features.otherInboxes
   },
   {
     title: "Trash",
     url: "#",
     icon: Trash2,
     isActive: false,
+    enabled: FeatureFlags.features.otherInboxes
   },
 ]
 
@@ -95,7 +101,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupContent className="px-1.5 md:px-0">
               <SidebarMenu>
                 {navMain.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.title} hidden={!item.enabled}>
                     <SidebarMenuButton
                       tooltip={{
                         children: item.title,
@@ -130,12 +136,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <div className="text-base font-medium text-foreground">
               {activeItem.title}
             </div>
-            <Label className="flex items-center gap-2 text-sm">
-              <span>Unreads</span>
-              <Switch className="shadow-none" />
-            </Label>
+            <div hidden={!FeatureFlags.features.unreads}>
+              <Label className="flex items-center gap-2 text-sm">
+                <span>Unreads</span>
+                <Switch className="shadow-none" />
+              </Label>
+            </div>
           </div>
-          <SidebarInput placeholder="Type to search..." />
+          <div hidden={!FeatureFlags.features.search}>
+            <SidebarInput placeholder="Type to search..." />
+          </div>
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup className="px-0">
